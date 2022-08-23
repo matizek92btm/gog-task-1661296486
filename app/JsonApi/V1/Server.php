@@ -4,13 +4,11 @@ namespace App\JsonApi\V1;
 
 use App\JsonApi\V1\CartProducts\CartProductObserver;
 use App\JsonApi\V1\CartProducts\CartProductSchema;
-use App\JsonApi\V1\Carts\CartObserver;
 use App\JsonApi\V1\Carts\CartSchema;
 use App\JsonApi\V1\Prices\PriceSchema;
 use App\JsonApi\V1\Products\ProductSchema;
 use App\JsonApi\V1\Profiles\ProfileSchema;
 use App\JsonApi\V1\Users\UserSchema;
-use App\Models\Cart;
 use App\Models\CartProduct;
 use LaravelJsonApi\Core\Server\Server as BaseServer;
 
@@ -20,7 +18,6 @@ class Server extends BaseServer
 
     public function serving(): void
     {
-        Cart::observe(CartObserver::class);
         CartProduct::observe(CartProductObserver::class);
     }
 

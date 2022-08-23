@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\CartProductController;
 use App\Http\Controllers\Api\V1\PriceController;
 use App\Http\Controllers\Api\V1\ProductController;
@@ -40,8 +41,8 @@ JsonApiRoute::server('v1')->prefix('v1')->resources(function ($server) {
             $relations->hasOne('product');
         });
 
-    $server->resource('carts', PriceController::class)
-        ->only('store', 'show', 'delete')
+    $server->resource('carts', CartController::class)
+        ->only('store', 'show')
         ->relationships(function ($relations) {
             $relations->hasOne('user');
         });

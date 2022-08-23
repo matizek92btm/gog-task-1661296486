@@ -2,8 +2,10 @@
 
 namespace App\JsonApi\V1\CartProducts;
 
-use App\Enums\CartProductAmount;
 use App\JsonApi\V1\Request;
+use App\Rules\CheckProductAmount;
+use App\Rules\CheckProductHasPrice;
+use App\Rules\CheckProductToCartAddLimit;
 use LaravelJsonApi\Validation\Rule as JsonApiRule;
 
 class CartProductRequest extends Request
@@ -11,8 +13,8 @@ class CartProductRequest extends Request
     public function rules(): array
     {
         return [
-            'amount' => 'required|digits_between:1, '.CartProductAmount::MAX->value,
-            'product' => [JsonApiRule::toOne()],
+            'amount' => ['required', new CheckProductAmount($this->json('data.relationships.product.data.id'))],
+            'product' => [JsonApiRule::toOne(), new CheckProductHasPrice(), new CheckProductToCartAddLimit()],
         ];
     }
 }

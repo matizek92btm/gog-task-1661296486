@@ -55,6 +55,8 @@ class User extends Authenticatable
     use SoftDeletes;
     use HasRoleAndPermission;
 
+    protected $with = ['cart'];
+
     protected $fillable = [
         'email',
         'password',

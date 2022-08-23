@@ -3,11 +3,13 @@
 namespace App\JsonApi\V1\Carts;
 
 use App\Models\Cart;
+use App\Services\Contracts\CartProductServiceInterface;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Number;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
+use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
 
@@ -21,7 +23,10 @@ class CartSchema extends Schema
             ID::make(),
             Number::make('max'),
             Number::make('totalPrice')->extractUsing(static function (Cart $cart) {
-                return 0;
+                return app(CartProductServiceInterface::class)->calculatePriceForProductsInCart($cart->id, $cart->user->profile->currency);
+            }),
+            Str::make('currency')->extractUsing(static function (Cart $cart) {
+                return $cart->user->profile->currency;
             }),
 
             HasMany::make('cartProducts')->readOnly(),
@@ -38,7 +43,7 @@ class CartSchema extends Schema
     {
         return [
             'user',
-            'cartProducts.product.prices'
+            'cartProducts.product.prices',
         ];
     }
 
