@@ -8,6 +8,18 @@ class ProductRequest extends Request
 {
     public function rules(): array
     {
-        return [];
+        $rules = [
+            'name' => ['required'],
+        ];
+
+        if ($this->isCreating()) {
+            $rules['name'][] = 'unique:products';
+        }
+
+        if ($this->isUpdating()) {
+            $rules['name'][] = 'unique:products,name,'.$this->json('data.id');
+        }
+
+        return $rules;
     }
 }

@@ -12,6 +12,11 @@ class AppServiceProvider extends ServiceProvider
             'App\Services\Contracts\AuthorizationServiceInterface',
             'App\Services\AuthorizationService',
         );
+
+        $this->app->bind(
+            'App\Services\Contracts\ProductServiceInterface',
+            'App\Services\ProductService',
+        );
     }
 
     public function boot()
