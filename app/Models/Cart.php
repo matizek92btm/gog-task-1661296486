@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Enums\CartMax;
+use App\Enums\CartElementAmount;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\Cart
@@ -15,6 +16,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int                             $max
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CartProduct[] $cartProducts
+ * @property-read int|null $cart_products_count
  * @property-read \App\Models\User $user
  * @method static \Database\Factories\CartFactory            factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Cart newModelQuery()
@@ -34,11 +37,16 @@ class Cart extends Model
     protected $fillable = [];
 
     protected $attributes = [
-        'max' => CartMax::THREE,
+        'max' => CartElementAmount::MAX,
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function cartProducts(): HasMany
+    {
+        return $this->hasMany(CartProduct::class);
     }
 }

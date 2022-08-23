@@ -1,31 +1,28 @@
 <?php
 
-namespace App\JsonApi\V1\Carts;
+namespace App\JsonApi\V1\CartProducts;
 
-use App\Models\Cart;
+use App\Models\CartProduct;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Number;
 use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
-use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
 
-class CartSchema extends Schema
+class CartProductSchema extends Schema
 {
-    public static string $model = Cart::class;
+    public static string $model = CartProduct::class;
 
     public function fields(): array
     {
         return [
             ID::make(),
-            Number::make('max'),
-            Number::make('totalPrice')->extractUsing(static function (Cart $cart) {
-                return 0;
-            }),
+            Number::make('amount'),
 
-            HasMany::make('cartProducts')->readOnly(),
             BelongsTo::make('user')->readOnly(),
+            BelongsTo::make('product'),
+
         ];
     }
 
@@ -37,8 +34,7 @@ class CartSchema extends Schema
     public function includePaths(): iterable
     {
         return [
-            'user',
-            'cartProducts.product.prices'
+            'product',
         ];
     }
 

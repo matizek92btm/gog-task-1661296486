@@ -20,7 +20,7 @@ class ProductSchema extends Schema
             ID::make(),
             Str::make('name'),
 
-            HasMany::make('prizes')->type('prizes')->readOnly(),
+            HasMany::make('prices')->type('prices')->readOnly(),
         ];
     }
 
@@ -32,7 +32,7 @@ class ProductSchema extends Schema
     public function includePaths(): iterable
     {
         return [
-            'prizes',
+            'prices',
         ];
     }
 

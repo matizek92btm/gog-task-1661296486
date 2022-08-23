@@ -15,6 +15,11 @@ class CartPolicy
         return true;
     }
 
+    public function view(Authenticatable $authenticatable, Cart $cart): bool
+    {
+        return $cart->user->is($authenticatable);
+    }
+
     public function update(Authenticatable $authenticatable, Cart $cart): bool
     {
         return $cart->user->is($authenticatable);
