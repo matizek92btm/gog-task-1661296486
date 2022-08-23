@@ -1,27 +1,26 @@
 <?php
 
-namespace App\JsonApi\V1\Users;
+namespace App\JsonApi\V1\Profiles;
 
-use App\Models\User;
+use App\Models\Profile;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\ID;
-use LaravelJsonApi\Eloquent\Fields\Relations\HasOne;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
 
-class UserSchema extends Schema
+class ProfileSchema extends Schema
 {
-    public static string $model = User::class;
+    public static string $model = Profile::class;
 
     public function fields(): array
     {
         return [
             ID::make('id'),
-            Str::make('email'),
-            Str::make('password')->hidden(),
+            Str::make('currency'),
 
-            HasOne::make('profile')->type('profiles')->readOnly(),
+            BelongsTo::make('user'),
         ];
     }
 
@@ -33,7 +32,7 @@ class UserSchema extends Schema
     public function includePaths(): iterable
     {
         return [
-            'profile',
+            'user',
         ];
     }
 

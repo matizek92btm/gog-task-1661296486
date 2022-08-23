@@ -1,27 +1,23 @@
 <?php
 
-namespace App\JsonApi\V1\Users;
+namespace App\JsonApi\V1\Products;
 
-use App\Models\User;
+use App\Models\Product;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\ID;
-use LaravelJsonApi\Eloquent\Fields\Relations\HasOne;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
 
-class UserSchema extends Schema
+class ProductSchema extends Schema
 {
-    public static string $model = User::class;
+    public static string $model = Product::class;
 
     public function fields(): array
     {
         return [
-            ID::make('id'),
-            Str::make('email'),
-            Str::make('password')->hidden(),
-
-            HasOne::make('profile')->type('profiles')->readOnly(),
+            ID::make(),
+            Str::make('name'),
         ];
     }
 
@@ -32,9 +28,7 @@ class UserSchema extends Schema
 
     public function includePaths(): iterable
     {
-        return [
-            'profile',
-        ];
+        return [];
     }
 
     public function pagination(): ?Paginator
