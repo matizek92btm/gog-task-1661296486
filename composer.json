@@ -9,6 +9,7 @@
         "barryvdh/laravel-ide-helper": "^2.12",
         "friendsofphp/php-cs-fixer": "^3.10",
         "guzzlehttp/guzzle": "^7.2",
+        "jeremykenedy/laravel-roles": "^8.1",
         "laravel-json-api/laravel": "^2.4",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
