@@ -55,8 +55,6 @@ class UsersTest extends ApiTestCase
 
     public function testLoginWrongEmail(): void
     {
-        $user = User::factory()->create();
-
         $response = $this->jsonApi()
             ->expects('users')
             ->withData([
