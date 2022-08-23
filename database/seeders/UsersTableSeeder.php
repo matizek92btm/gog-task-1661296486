@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Enums\CurrencyType;
 use App\Enums\RoleSlug;
+use App\Models\Cart;
 use App\Models\Profile;
 use App\Models\User;
 use Doctrine\DBAL\Exception;
@@ -43,8 +44,10 @@ class UsersTableSeeder extends Seeder
                 throw new Exception('Role not found! '.$roleSlug);
             }
             $newUser = User::factory()->setEmail($user['email'])->setPassword($user['password'])->create();
-            Profile::factory()->setCurrency($user['profile']['currency'])->setUser($newUser->id)->create();
             $newUser->attachRole($role);
+
+            Profile::factory()->setCurrency($user['profile']['currency'])->setUser($newUser->id)->create();
+            Cart::factory()->setUser($newUser->id)->create();
         }
     }
 

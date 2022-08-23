@@ -170,7 +170,7 @@ class PriceTest extends ApiTestCase
                     'product' => [
                         'data' => [
                             'type' => 'products',
-                            'id' => "{$product->id}",
+                            'id' => (string)$product->id,
                         ],
                     ],
                 ],
