@@ -6,6 +6,7 @@ use App\Models\Price;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Number;
+use LaravelJsonApi\Eloquent\Fields\Relations\BelongsTo;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
@@ -20,6 +21,8 @@ class PriceSchema extends Schema
             ID::make(),
             Number::make('value'),
             Str::make('currency'),
+
+            BelongsTo::make('product'),
         ];
     }
 

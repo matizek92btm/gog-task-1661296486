@@ -34,5 +34,8 @@ JsonApiRoute::server('v1')->prefix('v1')->resources(function ($server) {
         ->only('index', 'store', 'show', 'update', 'delete');
 
     $server->resource('prices', PriceController::class)
-        ->only('store', 'update', 'delete');
+        ->only('store', 'update', 'delete')
+        ->relationships(function ($relations) {
+            $relations->hasOne('product');
+        });
 });
