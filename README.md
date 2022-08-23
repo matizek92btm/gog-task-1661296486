@@ -3,14 +3,17 @@
 Zadanie rekrutacyjne dla GOG. Z ważnych informacji: 
 - Korzystam z Laravela plus json-api 
 - URL aplikacji: localhost:80
-- Do uruchomienia aplikacji: wchodzimy do folderu z apką i uruchamiamy: ```./vendor/bin/sail up -d``` a następnie ```./vendor/bin/sail composer pre-commit```
+- Do uruchomienia aplikacji: wchodzimy do folderu z apką i uruchamiamy: ```docker run --rm \
+  -u "$(id -u):$(id -g)" \
+  -v $(pwd):/var/www/html \
+  -w /var/www/html \
+  laravelsail/php81-composer:latest \
+  composer install --ignore-platform-reqs``` następnie ```./vendor/bin/sail up -d``` a na końcu ```./vendor/bin/sail composer pre-commit```
 - W celu uruchomienia testów: wchodzimy do folderu z apką i po jej uruchomieniu odpalamy ```./vendor/bin/sail test```
 
 ## API
 
-Dokumentację endpointów API wraz z przykładowymi żądaniami/odpowiedziami znajdziesz tutaj:  
-@todo
-
+Dokumentacja: https://documenter.getpostman.com/view/5327712/VUqrPHWa
 ## Użyteczne dane
 
 Predefiniowani użytkownicy:
