@@ -1,30 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
-         bootstrap="vendor/autoload.php"
-         colors="true"
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+    bootstrap="vendor/autoload.php"
+    colors="true"
 >
     <testsuites>
+        <testsuite name="Api">
+            <directory suffix="Test.php">./tests/Api</directory>
+        </testsuite>
         <testsuite name="Unit">
             <directory suffix="Test.php">./tests/Unit</directory>
-        </testsuite>
-        <testsuite name="Feature">
-            <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
     </testsuites>
     <coverage processUncoveredFiles="true">
         <include>
             <directory suffix=".php">./app</directory>
         </include>
+        <report>
+            <clover outputFile="./storage/framework/testing/coverage.xml" />
+            <html outputDirectory="./storage/framework/testing/report" lowUpperBound="60" highLowerBound="90" />
+            <php outputFile="./storage/framework/testing/coverage.serialized" />
+            <text outputFile="php://stdout" showOnlySummary="true" />
+        </report>
     </coverage>
     <php>
-        <env name="APP_ENV" value="testing"/>
-        <env name="BCRYPT_ROUNDS" value="4"/>
-        <env name="CACHE_DRIVER" value="array"/>
-        <env name="DB_DATABASE" value="testing"/>
-        <env name="MAIL_MAILER" value="array"/>
-        <env name="QUEUE_CONNECTION" value="sync"/>
-        <env name="SESSION_DRIVER" value="array"/>
-        <env name="TELESCOPE_ENABLED" value="false"/>
+        <server name="APP_DEBUG" value="false" />
+        <server name="APP_ENV" value="testing" />
+        <server name="APP_KEY" value="base64:7QIcobH81xq5lRu2aYcul6ZU99BG5LzumLyBKRb/T48=" />
+        <server name="APP_URL" value="http://localhost" />
+        <server name="BCRYPT_ROUNDS" value="4" />
+        <server name="BROADCAST_DRIVER" value="null" />
+        <server name="CACHE_DRIVER" value="array" />
+        <server name="DB_CONNECTION" value="sqlite" />
+        <server name="DB_DATABASE" value=":memory:" />
+        <server name="DEBUGBAR_ENABLED" value="false" />
+        <server name="INSURANCE_CONNECTION" value="fake" />
+        <server name="MAIL_MAILER" value="array" />
+        <server name="PROVIDER_CONNECTION" value="fake" />
+        <server name="QUEUE_CONNECTION" value="sync" />
+        <server name="REALTIMEVIDEO_CONNECTION" value="fake" />
+        <server name="SESSION_DRIVER" value="array" />
     </php>
 </phpunit>

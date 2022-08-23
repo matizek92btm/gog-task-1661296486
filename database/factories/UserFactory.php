@@ -13,7 +13,7 @@ class UserFactory extends Factory
     {
         return [
             'email' => fake()->safeEmail(),
-            'password' => 'SomeRandomPassword!',
+            'password' => 'Example1%',
         ];
     }
 
