@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\PriceController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
@@ -31,4 +32,7 @@ JsonApiRoute::server('v1')->prefix('v1')->resources(function ($server) {
 
     $server->resource('products', ProductController::class)
         ->only('index', 'store', 'show', 'update', 'delete');
+
+    $server->resource('prices', PriceController::class)
+        ->only('store', 'update', 'delete');
 });

@@ -17,6 +17,11 @@ class AppServiceProvider extends ServiceProvider
             'App\Services\Contracts\ProductServiceInterface',
             'App\Services\ProductService',
         );
+
+        $this->app->bind(
+            'App\Services\Contracts\PriceServiceInterface',
+            'App\Services\PriceService',
+        );
     }
 
     public function boot()

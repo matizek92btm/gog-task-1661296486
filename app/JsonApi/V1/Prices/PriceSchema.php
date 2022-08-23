@@ -1,26 +1,25 @@
 <?php
 
-namespace App\JsonApi\V1\Products;
+namespace App\JsonApi\V1\Prices;
 
-use App\Models\Product;
+use App\Models\Price;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\ID;
-use LaravelJsonApi\Eloquent\Fields\Relations\HasMany;
+use LaravelJsonApi\Eloquent\Fields\Number;
 use LaravelJsonApi\Eloquent\Fields\Str;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
 
-class ProductSchema extends Schema
+class PriceSchema extends Schema
 {
-    public static string $model = Product::class;
+    public static string $model = Price::class;
 
     public function fields(): array
     {
         return [
             ID::make(),
-            Str::make('name'),
-
-            HasMany::make('prizes')->type('prizes')->readOnly(),
+            Number::make('value'),
+            Str::make('currency'),
         ];
     }
 
@@ -32,7 +31,7 @@ class ProductSchema extends Schema
     public function includePaths(): iterable
     {
         return [
-            'prizes',
+            'product',
         ];
     }
 

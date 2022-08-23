@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\JsonApi\V1\Products\ProductRequest;
 use App\Models\Product;
+use App\Services\Contracts\PriceServiceInterface;
 use App\Services\Contracts\ProductServiceInterface;
 use Illuminate\Http\Response;
 use LaravelJsonApi\Core\Responses\DataResponse;
@@ -11,7 +12,8 @@ use LaravelJsonApi\Core\Responses\DataResponse;
 class ProductController extends Controller
 {
     public function __construct(
-        private ProductServiceInterface $productService
+        private ProductServiceInterface $productService,
+        private PriceServiceInterface $priceService
     ) {
     }
 
@@ -32,6 +34,11 @@ class ProductController extends Controller
 
     public function deleting(Product $product): Response
     {
+        $prizes = $product->prices;
+        $prizes->each(function ($prize) {
+            $this->priceService->delete($prize->id);
+        });
+
         $this->productService->delete($product->id);
 
         return response(null, Response::HTTP_NO_CONTENT);

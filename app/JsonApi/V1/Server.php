@@ -2,6 +2,7 @@
 
 namespace App\JsonApi\V1;
 
+use App\JsonApi\V1\Prices\PriceSchema;
 use App\JsonApi\V1\Products\ProductSchema;
 use App\JsonApi\V1\Profiles\ProfileSchema;
 use App\JsonApi\V1\Users\UserSchema;
@@ -21,6 +22,7 @@ class Server extends BaseServer
             UserSchema::class,
             ProfileSchema::class,
             ProductSchema::class,
+            PriceSchema::class,
         ];
     }
 }

@@ -80,7 +80,7 @@ class ProductsTest extends ApiTestCase
     {
         $user = $this->getUser();
         $this->actingAs($user);
-        $product = Product::factory()->create();
+        $product = Product::factory()->hasPrices()->create();
 
         $response = $this->jsonApi()
             ->expects('products')
@@ -88,6 +88,7 @@ class ProductsTest extends ApiTestCase
 
         $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
         $this->assertDatabaseMissing('products', ['id' => $product->id]);
+        $this->assertDatabaseMissing('prices', ['product_id' => $product->id]);
     }
 
     private function getUser(): User
