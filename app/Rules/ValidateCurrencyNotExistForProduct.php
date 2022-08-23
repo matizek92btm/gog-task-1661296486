@@ -13,15 +13,11 @@ class ValidateCurrencyNotExistForProduct implements Rule
 
     public function passes($attribute, $value): bool
     {
-        if (! $this->productId) {
-            return false;
-        }
-
         return ! Price::whereProductId($this->productId)->whereCurrency($value)->exists();
     }
 
     public function message(): string
     {
-        return trans('validation.cant_add_price');
+        return trans('validation.price_with_currency_exist');
     }
 }

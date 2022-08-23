@@ -22,6 +22,7 @@ class PriceRequest extends Request
             $rules['currency'][] = new ValidateCurrencyNotExistForProduct(
                 $this->json('data.relationships.product.data.id')
             );
+            $rules['product'][] = 'required';
         }
 
         return $rules;

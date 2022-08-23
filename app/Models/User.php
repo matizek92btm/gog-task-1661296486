@@ -21,6 +21,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Cart|null $cart
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \App\Models\Profile|null $profile
@@ -68,11 +69,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function profile(): HasOne
-    {
-        return $this->hasOne(Profile::class);
-    }
-
     public function setPasswordAttribute($value): void
     {
         if (! $value) {
@@ -80,5 +76,15 @@ class User extends Authenticatable
         }
 
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function profile(): HasOne
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function cart(): HasOne
+    {
+        return $this->hasOne(Cart::class);
     }
 }

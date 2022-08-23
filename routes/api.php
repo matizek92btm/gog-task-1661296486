@@ -38,4 +38,10 @@ JsonApiRoute::server('v1')->prefix('v1')->resources(function ($server) {
         ->relationships(function ($relations) {
             $relations->hasOne('product');
         });
+
+    $server->resource('carts', PriceController::class)
+        ->only('store', 'delete')
+        ->relationships(function ($relations) {
+            $relations->hasOne('user');
+        });
 });
