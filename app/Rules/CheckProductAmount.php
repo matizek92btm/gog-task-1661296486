@@ -21,7 +21,7 @@ class CheckProductAmount implements Rule
 
         return ! ($value > CartProductAmount::MAX->value || $productSumInCart + $value > CartProductAmount::MAX->value)
 
-         ;
+        ;
     }
 
     public function message(): string
