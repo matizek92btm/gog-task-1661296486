@@ -8,7 +8,7 @@ Zadanie rekrutacyjne dla GOG. Z ważnych informacji:
   -v $(pwd):/var/www/html
   -w /var/www/html
   laravelsail/php81-composer:latest
-  composer install --ignore-platform-reqs``` następnie skopiuj zawartość pliku .env.example do pliku .env (należy go utworzyć, proszę ustawić hasło dla bazy danych obojętnie jakie), następnie ```./vendor/bin/sail up -d``` a na końcu ```./vendor/bin/sail composer local-install```
+  composer install --ignore-platform-reqs```, następnie kopiujemy zawartość pliku .env.example do pliku .env (należy go utworzyć w głównym folderze projektu, proszę ustawić hasło dla bazy danych obojętnie jakie), następnie ```./vendor/bin/sail up -d``` a na końcu ```./vendor/bin/sail composer local-install```
 - W celu kolejnego uruchomienia apki wystarczy ```./vendor/bin/sail up -d``` a jak chcemy wycziśćić bazę ```./vendor/bin/sail composer pre-commit```
 - W celu uruchomienia testów: wchodzimy do folderu z apką i po jej uruchomieniu odpalamy ```./vendor/bin/sail test```
 
