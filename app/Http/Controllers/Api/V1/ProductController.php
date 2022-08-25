@@ -34,9 +34,9 @@ class ProductController extends Controller
 
     public function deleting(Product $product): Response
     {
-        $prizes = $product->prices;
-        $prizes->each(function ($prize) {
-            $this->priceService->delete($prize->id);
+        $prices = $product->prices;
+        $prices->each(function ($price) {
+            $this->priceService->delete($price->id);
         });
 
         $this->productService->delete($product->id);
