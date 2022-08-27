@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\Cart;
 use App\Repositories\Contracts\CartRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 
