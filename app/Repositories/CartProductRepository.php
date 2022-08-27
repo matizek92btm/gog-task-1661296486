@@ -24,6 +24,8 @@ class CartProductRepository implements CartProductRepositoryInterface
 
     public function getPriceForProductCartByProductCartIdAndCurrency(int $cartProductId, string $currency): float
     {
-        return $this->cartProduct->find($cartProductId)->product->prices()->where('currency', $currency)->first->value();
+        $price = $this->cartProduct->find($cartProductId)->product->prices()->where('currency', $currency)->first();
+
+        return (float)$price->value;
     }
 }

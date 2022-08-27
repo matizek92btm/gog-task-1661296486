@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\CartProductAmount;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -12,7 +13,7 @@ class CartFactory extends Factory
     public function definition()
     {
         return [
-            'max' => fake()->numberBetween(1, 99),
+            'max' => fake()->numberBetween(1, CartProductAmount::MAX->value),
         ];
     }
 

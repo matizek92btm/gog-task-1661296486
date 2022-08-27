@@ -16,6 +16,7 @@ class CartProductService implements CartProductServiceInterface
         $sum = 0;
 
         $cartProducts = $this->cartProductRepository->getCartProductsByCardId($cartId);
+
         $cartProducts->each(function ($cartProduct) use (&$sum, $currency) {
             $sum += $this->cartProductRepository->getPriceForProductCartByProductCartIdAndCurrency(
                 $cartProduct->id,
