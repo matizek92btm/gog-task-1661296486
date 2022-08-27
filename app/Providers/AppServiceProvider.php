@@ -2,6 +2,13 @@
 
 namespace App\Providers;
 
+use App\Models\Cart;
+use App\Models\Price;
+use App\Models\Product;
+use App\Services\CartService;
+use App\Services\PriceService;
+use App\Services\ProductService;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,6 +39,24 @@ class AppServiceProvider extends ServiceProvider
             'App\Services\Contracts\CartProductServiceInterface',
             'App\Services\CartProductService',
         );
+
+        $this->app->when(CartService::class)
+            ->needs(Model::class)
+            ->give(function () {
+                return new Cart();
+            });
+
+        $this->app->when(PriceService::class)
+            ->needs(Model::class)
+            ->give(function () {
+                return new Price();
+            });
+
+        $this->app->when(ProductService::class)
+            ->needs(Model::class)
+            ->give(function () {
+                return new Product();
+            });
     }
 
     public function boot()

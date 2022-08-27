@@ -27,7 +27,7 @@ class ProductController extends Controller
 
     public function updating(Product $product, ProductRequest $productRequest)
     {
-        $product = $this->productService->update($product, $productRequest->validated());
+        $product = $this->productService->update($product->id, $productRequest->validated());
 
         return DataResponse::make($product);
     }
