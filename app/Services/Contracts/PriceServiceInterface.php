@@ -2,6 +2,6 @@
 
 namespace App\Services\Contracts;
 
-interface PriceServiceInterface
+interface PriceServiceInterface extends CRUDServiceInterface
 {
 }

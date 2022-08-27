@@ -2,6 +2,6 @@
 
 namespace App\Services\Contracts;
 
-interface ProductServiceInterface
+interface ProductServiceInterface extends CRUDServiceInterface
 {
 }

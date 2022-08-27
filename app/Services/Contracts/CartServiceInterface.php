@@ -2,6 +2,6 @@
 
 namespace App\Services\Contracts;
 
-interface CartServiceInterface
+interface CartServiceInterface extends CRUDServiceInterface
 {
 }
