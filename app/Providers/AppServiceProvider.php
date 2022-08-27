@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\Cart;
+use App\Models\CartProduct;
 use App\Models\Price;
 use App\Models\Product;
+use App\Repositories\CartProductRepository;
 use App\Services\CartService;
 use App\Services\PriceService;
 use App\Services\ProductService;
@@ -56,6 +58,12 @@ class AppServiceProvider extends ServiceProvider
             ->needs(Model::class)
             ->give(function () {
                 return new Product();
+            });
+
+        $this->app->when(CartProductRepository::class)
+            ->needs(Model::class)
+            ->give(function () {
+                return new CartProduct();
             });
     }
 
