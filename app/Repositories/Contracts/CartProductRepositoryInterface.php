@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Contracts;
+namespace App\Repositories\Contracts;
 
-interface CartProductServiceInterface
+interface CartProductRepositoryInterface
 {
     public function sumProductsInCart(int $productId, int $cartId): int;
 

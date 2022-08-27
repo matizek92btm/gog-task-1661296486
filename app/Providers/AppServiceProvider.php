@@ -36,8 +36,8 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            'App\Services\Contracts\CartProductServiceInterface',
-            'App\Services\CartProductService',
+            'App\Repositories\Contracts\CartProductRepositoryInterface',
+            'App\Repositories\CartProductRepository',
         );
 
         $this->app->when(CartService::class)

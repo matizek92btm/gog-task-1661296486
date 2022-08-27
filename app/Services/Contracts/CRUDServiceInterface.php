@@ -9,6 +9,8 @@ interface CRUDServiceInterface
 {
     public function all(): Collection;
 
+    public function get(int $id): Model;
+
     public function create(array $attributes): Model;
 
     public function update(int $id, array $attributes): Model;

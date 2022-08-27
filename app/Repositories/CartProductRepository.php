@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services;
+namespace App\Repositories;
 
 use App\Models\CartProduct;
-use App\Services\Contracts\CartProductServiceInterface;
+use App\Repositories\Contracts\CartProductRepositoryInterface;
 
-class CartProductService implements CartProductServiceInterface
+class CartProductRepository implements CartProductRepositoryInterface
 {
     public function sumProductsInCart(int $productId, int $cartId): int
     {

@@ -18,6 +18,11 @@ class CRUDService implements CRUDServiceInterface
         return $this->model->all();
     }
 
+    public function get(int $id): Model
+    {
+        return $this->model->find($id);
+    }
+
     public function create(array $attributes): Product
     {
         return $this->model->create($attributes);

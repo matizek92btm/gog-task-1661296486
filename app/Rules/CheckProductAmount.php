@@ -3,7 +3,7 @@
 namespace App\Rules;
 
 use App\Enums\CartProductAmount;
-use App\Services\Contracts\CartProductServiceInterface;
+use App\Repositories\Contracts\CartProductRepositoryInterface;
 use Illuminate\Contracts\Validation\Rule;
 
 class CheckProductAmount implements Rule
@@ -14,7 +14,7 @@ class CheckProductAmount implements Rule
 
     public function passes($attribute, $value): bool
     {
-        $productSumInCart = app(CartProductServiceInterface::class)->sumProductsInCart(
+        $productSumInCart = app(CartProductRepositoryInterface::class)->sumProductsInCart(
             $this->productId,
             auth()->user()->cart->id
         );
