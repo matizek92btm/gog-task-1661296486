@@ -3,7 +3,7 @@
 namespace App\JsonApi\V1\Carts;
 
 use App\Models\Cart;
-use App\Repositories\Contracts\CartProductRepositoryInterface;
+use App\Services\Contracts\CartProductServiceInterface;
 use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Number;
@@ -23,7 +23,7 @@ class CartSchema extends Schema
             ID::make(),
             Number::make('max'),
             Number::make('totalPrice')->extractUsing(static function (Cart $cart) {
-                return app(CartProductRepositoryInterface::class)->calculatePriceForProductsInCart(
+                return app(CartProductServiceInterface::class)->calculatePriceForProductsInCart(
                     $cart->id,
                     $cart->user->profile->currency
                 );

@@ -6,10 +6,12 @@ use App\Models\Cart;
 use App\Models\CartProduct;
 use App\Models\Price;
 use App\Models\Product;
+use App\Models\User;
 use App\Repositories\CartProductRepository;
-use App\Services\CartService;
-use App\Services\PriceService;
-use App\Services\ProductService;
+use App\Repositories\CartRepository;
+use App\Repositories\PriceRepository;
+use App\Repositories\ProductRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,18 +25,23 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            'App\Services\Contracts\ProductServiceInterface',
-            'App\Services\ProductService',
+            'App\Services\Contracts\CartProductServiceInterface',
+            'App\Services\CartProductService',
         );
 
         $this->app->bind(
-            'App\Services\Contracts\PriceServiceInterface',
-            'App\Services\PriceService',
+            'App\Repositories\Contracts\ProductRepositoryInterface',
+            'App\Repositories\ProductRepository',
         );
 
         $this->app->bind(
-            'App\Services\Contracts\CartServiceInterface',
-            'App\Services\CartService',
+            'App\Repositories\Contracts\PriceRepositoryInterface',
+            'App\Repositories\PriceRepository',
+        );
+
+        $this->app->bind(
+            'App\Repositories\Contracts\CartRepositoryInterface',
+            'App\Repositories\CartRepository',
         );
 
         $this->app->bind(
@@ -42,19 +49,24 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\CartProductRepository',
         );
 
-        $this->app->when(CartService::class)
+        $this->app->bind(
+            'App\Repositories\Contracts\UserRepositoryInterface',
+            'App\Repositories\UserRepository',
+        );
+
+        $this->app->when(CartRepository::class)
             ->needs(Model::class)
             ->give(function () {
                 return new Cart();
             });
 
-        $this->app->when(PriceService::class)
+        $this->app->when(PriceRepository::class)
             ->needs(Model::class)
             ->give(function () {
                 return new Price();
             });
 
-        $this->app->when(ProductService::class)
+        $this->app->when(ProductRepository::class)
             ->needs(Model::class)
             ->give(function () {
                 return new Product();
@@ -64,6 +76,12 @@ class AppServiceProvider extends ServiceProvider
             ->needs(Model::class)
             ->give(function () {
                 return new CartProduct();
+            });
+
+        $this->app->when(UserRepository::class)
+            ->needs(Model::class)
+            ->give(function () {
+                return new User();
             });
     }
 

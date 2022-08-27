@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Repositories\Contracts\CartProductRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class CartProductRepository implements CartProductRepositoryInterface
@@ -16,14 +17,13 @@ class CartProductRepository implements CartProductRepositoryInterface
         return $this->cartProduct->whereProductId($productId)->whereCartId($cartId)->sum('amount');
     }
 
-    public function calculatePriceForProductsInCart(int $cartId, string $currency): int
+    public function getCartProductsByCardId(int $cartId): Collection
     {
-        $sum = 0;
-        $cartProducts = $this->cartProduct->with('product.prices')->whereCartId($cartId)->get();
-        $cartProducts->each(function ($cartProduct) use (&$sum, $currency) {
-            $sum += $cartProduct->product->prices()->where('currency', $currency)->first()->value * $cartProduct->amount;
-        });
+        return $this->cartProduct->with('product.prices')->whereCartId($cartId)->get();
+    }
 
-        return $sum;
+    public function getPriceForProductCartByProductCartIdAndCurrency(int $cartProductId, string $currency): float
+    {
+        return $this->cartProduct->find($cartProductId)->product->prices()->where('currency', $currency)->first->value();
     }
 }

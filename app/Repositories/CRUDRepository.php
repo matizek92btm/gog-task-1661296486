@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Services;
+namespace App\Repositories;
 
 use App\Models\Product;
-use App\Services\Contracts\CRUDServiceInterface;
+use App\Repositories\Contracts\CRUDRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-class CRUDService implements CRUDServiceInterface
+class CRUDRepository implements CRUDRepositoryInterface
 {
-    public function __construct(private Model $model)
+    public function __construct(protected Model $model)
     {
     }
 

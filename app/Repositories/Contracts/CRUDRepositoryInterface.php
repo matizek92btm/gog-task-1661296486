@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\Contracts;
+namespace App\Repositories\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-interface CRUDServiceInterface
+interface CRUDRepositoryInterface
 {
     public function all(): Collection;
 
