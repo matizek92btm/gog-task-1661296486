@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\Product;
 use App\Repositories\Contracts\CRUDRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -23,12 +22,12 @@ class CRUDRepository implements CRUDRepositoryInterface
         return $this->model->find($id);
     }
 
-    public function create(array $attributes): Product
+    public function create(array $attributes): Model
     {
         return $this->model->create($attributes);
     }
 
-    public function update(int $id, array $attributes): Product
+    public function update(int $id, array $attributes): Model
     {
         $model = $this->model->find($id);
         $model->update($attributes);

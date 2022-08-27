@@ -47,7 +47,7 @@ class UsersTableSeeder extends Seeder
             $newUser->attachRole($role);
 
             Profile::factory()->setCurrency($user['profile']['currency'])->setUser($newUser->id)->create();
-            Cart::factory()->setUser($newUser->id)->create();
+            //Cart::factory()->setUser($newUser->id)->create();
         }
     }
 

@@ -18,7 +18,7 @@ class CartController extends Controller
         $cart = $user->cart;
 
         if (! $cart) {
-            $cart = $this->cartRepository->create($user);
+            $cart = $this->cartRepository->create(['user' => $user]);
         }
 
         return DataResponse::make($cart);
