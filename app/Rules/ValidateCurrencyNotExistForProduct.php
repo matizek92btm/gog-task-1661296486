@@ -13,7 +13,10 @@ class ValidateCurrencyNotExistForProduct implements Rule
 
     public function passes($attribute, $value): bool
     {
-        return ! app(PriceRepositoryInterface::class)->priceForProductIdAndCurrencyExist($this->productId, $value);
+        return ! app(PriceRepositoryInterface::class)->priceForProductIdAndCurrencyExist(
+            $this->productId,
+            $value
+        );
     }
 
     public function message(): string
