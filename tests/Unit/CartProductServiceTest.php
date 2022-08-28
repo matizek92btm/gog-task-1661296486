@@ -47,11 +47,6 @@ class CartProductServiceTest extends TestCase
         $this->assertEquals($expectedPrice, $calculatedPrice);
     }
 
-    private function getMockCartProductRepository(): MockInterface
-    {
-        return $this->mock(CartProductRepositoryInterface::class);
-    }
-
     private function getProductCartStdClassForRepository(int $productCartId, int $amount): StdClass
     {
         $object = new StdClass();
