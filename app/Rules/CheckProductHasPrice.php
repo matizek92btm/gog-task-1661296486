@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-use App\Models\Product;
+use App\Repositories\Contracts\ProductRepositoryInterface;
 use Illuminate\Contracts\Validation\Rule;
 
 class CheckProductHasPrice implements Rule
@@ -13,7 +13,7 @@ class CheckProductHasPrice implements Rule
 
     public function passes($attribute, $value): bool
     {
-        return ! (Product::find($value['id'])->prices->isEmpty());
+        return ! (app(ProductRepositoryInterface::class)->get($value['id'])->prices->isEmpty());
     }
 
     public function message(): string

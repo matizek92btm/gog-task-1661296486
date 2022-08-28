@@ -2,7 +2,7 @@
 
 namespace App\Rules;
 
-use App\Models\Price;
+use App\Repositories\Contracts\PriceRepositoryInterface;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidateCurrencyNotExistForProduct implements Rule
@@ -13,7 +13,7 @@ class ValidateCurrencyNotExistForProduct implements Rule
 
     public function passes($attribute, $value): bool
     {
-        return ! Price::whereProductId($this->productId)->whereCurrency($value)->exists();
+        return ! app(PriceRepositoryInterface::class)->priceForProductIdAndCurrencyExist($this->productId, $value);
     }
 
     public function message(): string
